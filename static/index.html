@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Avyra AI</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/atom-one-dark.min.css" />
+</head>
+<body>
+  <div class="layout">
+    <div id="sidebar" class="sidebar">
+      <button id="sidebar-toggle" class="sidebar-toggle-btn" aria-label="Toggle sidebar">☰</button>
+      <button id="new-chat-btn" class="new-chat-btn">New Chat</button>
+      <div id="chat-list" class="chat-list"></div>
+    </div>
+
+    <div class="sidebar-overlay"></div>
+
+    <div class="main">
+      <header class="header">
+        <div class="header-title">
+          <img src="https://ik.imagekit.io/ryh8eunbca/Avyra%20AI.png?updatedAt=1756443329347" alt="Avyra AI Logo" class="header-logo" />
+          Avyra AI - Developed by siddhartha
+        </div>
+        <div class="header-controls">
+          <a href="/logout" class="logout-btn">Logout</a>
+          <button id="theme-toggle-btn" class="theme-toggle-btn" aria-label="Toggle theme" type="button">
+            <img id="theme-icon" src="https://ik.imagekit.io/ryh8eunbca/night.png?updatedAt=1756296632579" alt="Dark mode" style="width:24px; height:24px;">
+          </button>
+        </div>
+      </header>
+      <div id="chat-box" class="chat-box"></div>
+      <div id="typing-indicator" class="typing-indicator hidden" aria-live="polite" aria-atomic="true">
+        Thinking <span></span><span></span><span></span>
+      </div>
+      <form id="chat-form" class="chat-form" autocomplete="off" novalidate>
+        <textarea id="user-input" rows="1" placeholder="Type message..." spellcheck="false"></textarea>
+        <button type="submit" aria-label="Send message">➤</button>
+      </form>
+    </div>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/4.3.0/marked.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>

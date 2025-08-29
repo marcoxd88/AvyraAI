@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Register - Avyra AI</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body class="auth-page">
+
+  <div class="auth-card glass-card">
+    <div class="auth-logo-container">
+      <img src="https://ik.imagekit.io/ryh8eunbca/Avyra%20AI.png?updatedAt=1756443329347" alt="Test Logo" class="auth-logo" />
+    </div>
+    <h2 class="auth-title">Create Account</h2>
+    <p class="auth-subtext">Join Avyra AI and start chatting</p>
+
+    <div id="error" class="error-msg"></div>
+
+    <form class="auth-form" onsubmit="event.preventDefault(); register();">
+      <input id="username-register" placeholder="Username" minlength="3" required autocomplete="username" />
+      <input id="email-register" type="email" placeholder="Email" required autocomplete="email" />
+      <input id="phone-register" placeholder="Phone (optional)" autocomplete="tel" />
+      <div class="password-field">
+        <input id="password-register" type="password" placeholder="Password" minlength="8" required autocomplete="new-password" />
+        <span id="toggle-pass-register" class="toggle-pass">👁</span>
+      </div>
+      <button type="submit" class="btn-primary btn-full">Sign Up</button>
+    </form>
+
+    <div class="auth-switch">
+      Already have an account? <a href="login.html" class="link-primary">Log in</a>
+    </div>
+  </div>
+
+  <script>
+    document.getElementById("toggle-pass-register").onclick = () => {
+      let p = document.getElementById("password-register");
+      p.type = p.type === "password" ? "text" : "password";
+    };
+    async function register() {
+      const errorBox = document.getElementById("error");
+      errorBox.innerText = "";
+      let u = document.getElementById("username-register").value.trim();
+      let e = document.getElementById("email-register").value.trim();
+      let ph = document.getElementById("phone-register").value.trim();
+      let p = document.getElementById("password-register").value.trim();
+      if (u.length < 3) { errorBox.innerHTML = "⚠️ Username must be at least 3 characters"; return; }
+      if (!e) { errorBox.innerHTML = "⚠️ Email is required"; return; }
+      if (p.length < 8) { errorBox.innerHTML = "⚠️ Password must be at least 8 characters"; return; }
+      const btn = document.querySelector(".auth-form button");
+      btn.disabled = true; btn.innerText = "Registering...";
+      try {
+        const res = await fetch("/register", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ username: u, email: e, phone: ph, password: p })
+        });
+        const data = await res.json();
+        if (data.success) location = "login.html";
+        else errorBox.innerHTML = `⚠️ ${data.error || "Registration failed"}`;
+      } catch {
+        errorBox.innerHTML = "⚠️ Network error. Please try again.";
+      }
+      btn.disabled = false;
+      btn.innerText = "Sign Up";
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Login - Avyra AI</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body class="auth-page">
+  <div class="auth-card glass-card">
+    <div class="auth-logo-container">
+      <img src="https://ik.imagekit.io/ryh8eunbca/Avyra%20AI.png?updatedAt=1756443329347" alt="Test Logo" class="auth-logo" />
+    </div>
+    <h2 class="auth-title">Welcome Back</h2>
+    <p class="auth-subtext">Login to continue chatting with Avyra AI</p>
+
+    <div id="error" class="error-msg"></div>
+
+    <div class="auth-form">
+      <input id="identifier-login" placeholder="Username / Email / Phone" required autocomplete="username" />
+      <div class="password-field">
+        <input id="password-login" type="password" placeholder="Password" required autocomplete="current-password" />
+        <span id="toggle-pass-login" class="toggle-pass" aria-label="Toggle password visibility">👁</span>
+      </div>
+      <button onclick="login()" class="btn-primary btn-full">Log In</button>
+    </div>
+
+    <div class="auth-switch">
+      No account? <a href="register.html" class="link-primary">Sign up</a>
+    </div>
+  </div>
+
+  <script>
+    document.getElementById("toggle-pass-login").onclick = () => {
+      let p = document.getElementById("password-login");
+      p.type = p.type === "password" ? "text" : "password";
+    };
+    async function login() {
+      const errorBox = document.getElementById("error");
+      let id = document.getElementById("identifier-login").value.trim();
+      let pwd = document.getElementById("password-login").value.trim();
+      if (!id || !pwd) {
+        errorBox.innerHTML = "⚠️ Please enter all fields.";
+        return;
+      }
+      const res = await fetch("/login", {
+        method: "POST", 
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ identifier: id, password: pwd })
+      });
+      const data = await res.json();
+      if (data.success) location = "/";
+      else errorBox.innerHTML = `⚠️ ${data.error || "Login failed"}`;
+    }
+  </script>
+</body>
+</html>
