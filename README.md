@@ -112,4 +112,4 @@ pytest
 
 License
 
-This project is licensed under the [MIT License]([https://github.com/AvyraAI/AvyraAi/blob/main/LICENSE](https://github.com/marcoxd88/AvyraAI/blob/main/LICENSE)).
+This project is licensed under the [MIT License] ([https://github.com/AvyraAI/AvyraAi/blob/main/LICENSE](https://github.com/marcoxd88/AvyraAI/blob/main/LICENSE)).
