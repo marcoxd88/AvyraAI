@@ -1,0 +1,7 @@
+flask
+flask-bcrypt
+flask-cors
+groq
+python-dotenv
+google-search-results
+sentence_transformers
